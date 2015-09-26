@@ -1,0 +1,58 @@
+%!TEX root = rapport.tex
+
+\section{Données}
+
+Les données issues de l’enquête sont anonymisées puis placées sur un serveur
+mis à disposition par Huma-Num, \q{Très Grande Infrastructure de Recherche
+(TGIR)} du CNRS. Elles sont divisées en deux archives compressées, l’une pour
+le \I{panel \sc csa}, l’autre pour le \I{hors-panel}.
+
+Elles suivent toutes les deux le même format, à savoir un répertoire par
+enquêté, qui contiennent tous quatre fichiers~:
+
+\begin{itemize}
+    \item \texttt{qualify.json} contient les informations renseignées dans le
+        questionnaire de l’application \I{Algopol}, comme le code postal et le
+        sexe.
+    \item \texttt{ego.json} contient les informations extraites du profil de
+        l’enquêté, comme la liste (anonymisé) de ses \I{amis} et les \I{pages}
+        qu’il a \I{aimé}.
+    \item \texttt{friends.jsons} contient l’équivalent de \texttt{ego.json}
+        pour chacun des \I{amis} de l’enquêté.
+    \item \texttt{statuses.jsons} contient l’ensemble des publications sur le
+        profil de l’enquêté, qu’elles soient publiées par lui-même ou par un de
+        ses \I{amis}.
+\end{itemize}
+
+Excepté le premier, tous les fichiers sont des exports de l’\api{} de
+\fb{}. Ces données sont organisées de façon peu claire, et il a donc
+fallu expérimenter avec le format et tester plusieurs hypothèses pour
+déterminer à quoi correspondait chacun des champs, l’anonymisation et la
+compression des données ne facilitant pas la tâche car il manque les champs
+correspondant au contenu textuel et les valeurs anonymisées sont toutes dans le
+même format : un \I{hash} de 40 caractères, quelle qu’ait été la valeur
+d’origine. De plus, les listes, notamment de publications, ne sont pas triées,
+on ne peut donc pas se fier à la position d’une publication dans la liste pour
+avoir son ancienneté.
+
+Les champs disponibles varient d’enquêté à enquêté car tous n’ont pas
+renseigné les mêmes informations, et les fonctionnalités de \fb{} ont
+varié dans le temps~; il n’y a pas toujours eu des publications, \I{likes} et
+commentaires, certaines fonctionnalités ont disparu depuis leur création,
+d'autres ont évolué. De plus, tous les enquêtés ne se sont pas inscrits au même
+moment, et de ce fait nous n’avons pas la même période d’activité pour tous.
+
+J’ai pu collaborer avec Stéphane Raux, doctorant chez Linkfluence, qui a
+développé l’application de collecte des données, et ainsi pu lui faire des
+retours sur le format utilisé pour l’export des données, qui va évoluer pour
+prendre en compte ces remarques et les attentes des chercheurs qui utilisent
+ces données.
+
+Un tel volume de données rend difficile l’exploration du corpus si l’on ne
+dispose pas d’indications permettant d’avoir une idée globale de l’activité des
+enquêtés, ou de critères pour les catégoriser. Tous les chercheurs ne sont pas
+informaticiens, les sociologues par exemple ne peuvent pas travailler sur des
+archives de cette taille sans les outils nécessaires pour les exploiter. Il est
+donc important de pouvoir définir des indicateurs permettant d’avoir un aperçu
+de l’activité des enquêtés aussi bien au niveau individuel que sur l’ensemble
+du corpus.

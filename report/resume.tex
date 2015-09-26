@@ -1,0 +1,103 @@
+\documentclass[]{article}
+
+\usepackage[francais]{babel}
+
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{epsfig,graphics,graphicx}
+% \usepackage{pstricks,pst-node,pst-tree}
+\ifxetex
+  \usepackage{fontspec,xltxtra,xunicode}
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+\fi
+
+\usepackage[unicode=true]{hyperref}
+\usepackage[babel=true]{csquotes}
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevents overfull lines
+% \setcounter{secnumdepth}{0}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\newcommand{\I}{\textit}
+\newcommand{\q}{\enquote}
+\newcommand{\hash}{\texttt}
+
+\def\fb{Facebook}
+\def\twt{Twitter}
+\def\humanum{Huma-Num}
+\def\api{\I {\sc api}}
+
+\def\csa{\I{\sc csa}}
+\def\nocsa{\I{hors-{\sc csa}}}
+
+\def\pnas{{\sc pnas}}
+
+\author{Baptiste Fontaine}
+\date{25 juin 2014}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+    \Large\textbf{Analyse de la sociabilité sur Facebook : Extraction d’indicateurs}\\
+    ~\\ % hacky spacing
+\end{center}
+
+L’analyse des processus de circulation de l’information est un domaine connu en
+sciences sociales, qui a vu l’apparition d’une nouvelle dimension avec
+l’arrivée des réseaux sociaux en ligne tels que \fb{} ou \twt{}.
+Ces sites ont comme point commun de permettre à leurs utilisateurs de produire
+et partager du contenu avec d’autres utilisateurs, et de fournir un lien entre
+eux. L’\I{amitié} sur \fb{} lie deux \I{amis} entre eux qui ont de ce fait
+chacun accès au contenu de l’autre, et l’\I{abonnement} sur \twt{} permet à
+un utilisateur de \I{suivre} le contenu produit par la cible de l’abonnement.
+
+L’arrivée de ces plateforme rend un grand volume de données disponibles pour
+les recherches, qu’il n’est pas évident d’exploiter. Ce {\sc tre}, réalisé dans
+le cadre du projet \I{Algopol} qui regroupe des chercheurs de plusieurs
+horizons différents autour de la problématique de circulation de l’information
+entre un utilisateur et ses \I{amis} sur \fb{}, a consisté en la recherche et
+la définition d’indicateurs sur des données anonymisées issues de profils
+d’utilisateurs \fb{} afin de mieux les comprendre et fournir des bases de
+recherche pour les membres du projet.
+
+Ces indicateurs se regroupent en trois familles, comprenant les indicateurs
+déjà présents dans les données, les indicateurs calculés comme le nombre
+d’\I{amis} ou de contenus publiés, et les indicateurs temporels qui se basent
+sur les différents motifs que l’on peut observer en suivant l’évolution du
+profil d’un utilisateur \fb{} à travers le temps. On remarque ainsi des motifs
+qui se répètent plus ou moins, et permettent de classer les utilisateurs en
+fonction de leurs usages de la plateforme. Ainsi, certains ont une activité
+très régulière tandis que d’autres ne publient du contenu que rarement, par
+\q{pics} d’activité. Il faut pouvoir repérer ces motifs puis automatiser leur
+reconnaissance de façon pertinente.
+
+En parallèle de la recherche de ces indicateurs, j’ai développé une application
+en ligne de présentation de ceux-ci, tant au niveau global (agrégé) que pour
+chacun des 11~000 utilisateurs du corpus dont on dispose. Cette application
+est une plateforme centrale dans ce projet, puisqu’elle permet de mieux
+comprendre les données du projet, qui ne sont pas disponibles dans un format
+lisible par un humain, et en trop grand volume pour être parcourues à la main.
+
+Enfin, j’ai étudié un article de J. Saram\"aki, dans lequel il décrit une
+expérience montrant la constance du modèle de communication de lycéens puis
+étudiants, indépendamment de la variation de leur cercle d’amis. J’ai pu
+reproduire des calculs présentés dans l’article sur les données associées, et
+montrer qu’il est possible de reproduire cette méthodologie sur les données
+\fb{} que nous avons ici.
+
+Les indicateurs extraits servent de base à des chercheurs pour plusieurs pistes
+de recherche différentes, et continueront à servir une fois ce {\sc tre}
+terminé.
+
+\end{document}

@@ -1,0 +1,341 @@
+%!TEX root = rapport.tex
+
+\section{Indicateurs}
+
+Les indicateurs définis avec Irène Bastard ont été extraits des données de la
+même façon pour chacun des deux ensembles qui forment le corpus des enquêtés,
+mais ont ensuite été présentés de façon séparée.
+
+Ils se divisent en trois grandes familles : les indicateurs \I{présents},
+\I{calculés} et \I{temporels}.
+
+\subsection{Procédé d’extraction}
+
+L’extraction s’est faite directement sur chacune des archives, qui n’ont pas
+été décompressées entièrement mais plutôt à la volée~: le programme
+d’extraction parcourt une archive pas à pas, et à chaque répertoire d’ego
+rencontré, le décompresse dans un répertoire temporaire, appelle les fonctions
+d’extraction de chacun des indicateurs sur les fichiers extraits, puis supprime
+ce répertoire et passe au suivant. Ce procédé, bien que plus lent qu’une
+décompression complète, permet de limiter l’espace utilisé.\footnote{les
+archives compressées pour le \csa{} et \nocsa{} occupent respectivement 1.1Go et
+29Go.}
+
+Plusieurs extractions ont été nécessaires pour s’adapter aux changements
+d’indicateurs ainsi qu’à l’ajout de nouveaux durant toute la période du {\sc
+tre}.
+
+Les indicateurs extraits sont stockés dans une base de données permettant un
+accès rapide et l’exécution de requêtes.
+
+\subsection{Indicateurs présents}
+
+Les indicateurs présents sont directement extractables des données et
+concernent principalement les valeurs non-numériques, telles que le sexe, le
+code postal et la catégorie socio-professionnelle. Certaines informations se
+recoupent, par exemple le sexe de l’enquêté est présent dans les données du
+formulaire de l’application \I{Algopol} et dans le profil \fb{}, bien
+que pas toujours renseigné. On garde dans ce cas les deux informations, car
+elles peuvent parfois différer.\footnote{Certains enquêtés du corpus ont
+renseigné un sexe différent dans l’application \I{Algopol} et dans leur profil
+\fb{}.} L’âge de l’enquêté est également fourni via le formulaire de
+l’application.
+
+Ces indicateurs sont ensuite normalisés, les données du formulaire étant en
+français alors que celles de l’\api{} de \fb{} étant en anglais.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{figures/ages/csa.png}
+    \end{center}
+    \caption{\label{ages-csa}Répartition des âges sur l’ensemble \csa{}}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{figures/ages/all.png}
+    \end{center}
+    \caption{\label{ages-all}Répartition des âges sur l’ensemble \nocsa{}}
+\end{figure}
+
+Les figures \ref{ages-csa} et \ref{ages-all} montrent la répartition des âges
+des deux ensembles en fonction du sexe de l’enquêté.\footnote{C’est le sexe
+donné sur le formulaire de l’application, plus fiable que celui du profil
+\fb{}.} Elles illustrent bien la différence de répartition des âges et
+des sexes entre les deux ensembles, avec un ensemble \csa{} relativement
+homogène (même si le pic féminin à 30--34 ans peut surprendre) et un ensemble
+\nocsa{} plutôt jeune et masculin.
+
+\subsection{Indicateurs calculés}
+
+Une large partie des indicateurs nécessitent d’être calculés pour être
+produits. On y trouve les indicateurs quantitatifs comme le nombre d’\I{amis}, le
+nombre de publications, etc.
+
+\subsubsection{Quantités}
+
+La plupart des indicateurs quantitatifs sont simplement des longueurs de listes
+fournies par l’\api{} de \fb{}, parfois filtrées pour avoir des indicateurs
+plus précis (par exemple le nombre d’\I{ami(e)s} de chaque sexe) ou des
+nombres détaillés par type de publication.
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tabular}{l*{5}{r}}
+Indicateur             &  min & médiane & moyenne & max     \\
+\hline
+\I{Amis}               &  0   & 266     & 364     & 4~905   \\
+\I{Amies} femmes       &  0   & 115     & 158     & 2~963   \\
+\I{Amis} hommes        &  0   & 140     & 197     & 4~088   \\
+Publications           &  0   & 2~510   & 3~571   & 130~751 \\
+\I{Likes} reçus        &  0   & 480     & 1~003   & 59~600  \\
+Commentaires reçus     &  0   & 649     & 1~300   & 72~624  \\
+Publications partagées &  0   & 108     & 405     & 34~127  \\
+\I{Pages aimées}       &  0   & 20      & 45      & 1~527   \\
+Photos                 &  0   & 38      & 105     & 16~901  \\
+Liens partagés         &  0   & 317     & 670     & 50~496  \\
+        \end{tabular}
+    \end{center}
+    \caption{\label{indicators}Indicateurs quantitatifs sur l’ensemble \nocsa{}}
+\end{figure}
+
+La figure \ref{indicators} montre une partie des indicateurs calculés avec leurs
+valeurs minimales, maximales, médianes et moyennes pour l’ensemble
+\nocsa{}.\footnote{Cet ensemble représente 11~441 valeurs. Le sexe des amis se
+base sur le champ correspondant dans le profil \fb{} de chacun d’entre eux,
+lorsqu’il est renseigné.}
+
+\subsubsection{Liens}
+
+En plus du nombre total de liens partagés, ceux-ci sont également extraits puis
+triés en fonction du domaine de leur {\sc url} et ordonnés par nombre de
+partages décroissants. Cela permet de voir quels sont les domaines les plus
+partagés par un enquêté, et après qualification de ces domaines, de catégoriser
+les enquêtés en fonction des liens partagés.
+
+\subsection{Indicateurs temporels}
+
+Les indicateurs temporels profitent du fait que l’on dispose de données sur
+plusieurs années (respectivement $4.2$ et 5 ans en moyenne sur les ensembles
+\csa{} et \nocsa{}).
+
+Il est nécessaire, pour trouver des indicateurs pertinents, de générer un grand
+nombre d’histogrammes montrant l’évolution d’une métrique voulue, de façon à
+pouvoir les observer et trouver des motifs à traduire en indicateurs. J’ai
+inclus dans ce rapport deux exemples de mosaïques de neuf histogrammes
+chacunes, mais le script qui les génère est paramétrable et a été notamment
+utilisé pour des mosaïques de $8\times20$ histogrammes.
+
+\begin{figure}[ht]
+    \label{indicators:pubs}
+    \begin{center}
+        \includegraphics[width=.85\textwidth]{figures/plots/time/pubs-5y-3x3.pdf}
+    \end{center}
+    \caption{Publications mensuelles pour quelques enquêtés pendant 5 ans}
+\end{figure}
+
+La figure~\ref{indicators:pubs} montre la quantité de publications mensuelles
+pour neuf enquêtés sélectionnés dans l’ensemble \csa{}, sur cinq ans à compter
+de leur première publication sur \fb{}. Chaque histogramme donne les premiers
+caractères de l’identifiant de l’enquêté et le nombre maximal de publications
+mensuelles sur ces cinq ans. Les valeurs en abscisses sont les mois, et les
+valeurs en ordonnées ne sont pas données car nous nous intéressons plus aux
+motifs d’histogrammes qu’à leurs valeurs exactes.
+
+La première ligne montre des exemples du motif de \q{réveil tardif}, où les
+enquêtés concernés se sont inscrits sur la plateforme, puis ont \q{oublié} leur
+compte, avec pas (ou très peu) d’activité pendant deux à quatre ans, puis d’un
+seul coup une forte activité. Le second enquêté de la ligne (\hash{2ba7a2f6}),
+par exemple, a eu une activité négligeable pendant près de quatre ans avant de
+commencer une activité intense (plus d’une centaine de publications mensuelles)
+jusqu’à la fin de la période observée.
+
+% TODO parler du script de détection du réveil tardif, en expliquant en gros ce
+% qu'il fait et son taux de réussite
+
+La deuxième ligne montre des enquêtés avec une activité moyenne, et l’on
+distingue bien deux pics d’activité sur le troisième d’entre eux
+(\hash{1e144f47}). Ce motif d’activité avec plusieurs pics séparés par des
+périodes d’activité modérée se retrouve dans une partie des enquêtés étudiés
+pour ces indicateurs, très peu d’entre eux ont une réelle activité régulière
+sur une période couvrant plusieurs années.
+
+Enfin, les deux premiers histogrammes de la troisième ligne montrent un autre
+motif assez courant où l’on observe une activité en augmentation régulière,
+puis une baisse plus ou moins régulière selon les enquêtés, sans reprise
+d’activité ensuite. Le troisième histogramme de la ligne illustre un motif
+similaire où l’enquêté est très actif dès le début, puis diminue son activité
+progressivement jusqu’à un seuil très faible comparé à son activité originelle.
+
+\begin{figure}[ht]
+    \label{indicators:friends}
+    \begin{center}
+        \includegraphics[width=.85\textwidth]{figures/plots/time/friends-5y-3x3.pdf}
+    \end{center}
+    \caption{Nouveaux \I{amis} mensuels pour quelques enquêtés pendant 5 ans}
+\end{figure}
+
+La figure~\ref{indicators:friends} a été réalisée de la même façon que la
+figure~\ref{indicators:pubs}, mais représente le nombre de \emph{nouveaux}
+\I{amis} mensuels.
+
+Ici, la première ligne montre trois exemples d’enquêtés avec peu de nouveaux
+\I{amis} mensuels. Le premier est un homme agé de 23 ans au moment de
+l’enquête, avec 50 amis après près de 6 ans d’activité modérée (470
+publications), alors que la troisième est une femme avec dix fois plus de
+publications sur la même période et 95 amis. Le premier a reçu à peine 20
+\I{likes} sur ses publications, alors que la seconde en a reçu plus de $4~000$.
+La croissance du nombre de nouvelles relations n’est donc pas toujours liée à
+l’activité sur la plateforme, observée en terme de publications.
+
+La ligne du milieu montre des enquêtés plus actifs, avec les deuxièmes et
+troisièmes qui montrent un motif relativement courant, où l’enquêté ajoute
+toutes les personnes qu’il connait sur la plateforme puis n’ajoute quasiment
+plus personne après ce pic initial.
+
+La troisième ligne montre des enquêtés actifs nettement plus régulièrement sur
+ce point. On remarquera une très nette pause d’un an sur le dernier enquêté
+(\hash{9d043fa8}), un homme de 60 ans au moment de l’enquête, avec $1~080$ amis
+et inscrit sur la plateforme depuis plus de 6 ans.
+
+
+Une fois différents motifs remarqués, il est nécessaire d’automatiser le
+processus de reconnaissance pour l’exécuter sur l’ensemble du corpus. Cette
+automatisation prend du temps car il est nécessaire de tester plusieurs
+hypothèses pour tenter de reconnaître un motif donné de façon simple tout en
+évitant les faux négatifs et surtout les faux positifs. La
+figure~\ref{classified-pubs} montre un exemple de résultats d’une fonction que
+j’ai écrite pour reconnaître le motif \q{réveil tardif}. Les histogrammes
+colorés en orange sont rejetés par la fonction, tandis que ceux colorés en vert
+sont reconnus comme suivant ce motif.
+
+\begin{figure}[ht]
+    \label{classified-pubs}
+    \begin{center}
+        \includegraphics[width=.85\textwidth]{figures/plots/time/classified-pubs-5y-4x2.pdf}
+    \end{center}
+    \caption{Classification d’histogrammes de publications}
+\end{figure}
+
+La fonction prend la liste des valeurs d’un histogramme, et a deux paramètres.
+Le premier, $m$, est entier et représente le nombre maximal de publications
+mensuelle qu’un enquêté peut avoir avant d’être considéré actif. Le second,
+$t$, est réel, avec $t\in[0-1]$, et représente la part maximale d’activité
+possible pendant la période d’\q{endormissement} par rapport à l’activité
+totale pendant la période d’observation. De façon plus formelle, on définit la
+fonction $activity$~:
+
+$$activity(a, b) = \sum_{i=a}^{b} v_i$$
+
+Cette fonction est ensuite utilisée par la fonction $f$ de reconnaissance du
+motif~:
+
+% spacing/alignement à améliorer ?
+$$f_{m,t}((v_0, v_1, \ldots, v_n)) = \left\{\begin{array}{ll}
+    1 & \mbox{si } \exists k\ge12 \mbox{ tel que } (\ast) \\
+    0 & \mbox{sinon}
+\end{array}\right.$$
+
+$$(\ast)\;\left\{\begin{array}{l}
+        v_k \ge m \\
+        \forall i \in [0-k[\;\; v_i < m \\
+        activity(0, k-1)/activity(0, n) < t
+\end{array}\right.$$\\
+
+On ne prend que les valeurs de $k$ supérieures ou égales à 12 car on souhaite
+n’avoir que les enquêtés qui ont été inactifs pendant une période d’au moins un
+an (12 mois), mais cette valeur pourrait être modifiée. Les valeurs utilisées
+pour la production des exemples de la figure~\ref{classified-pubs} sont $m=5$
+et $t=0.05$.
+
+Le dernier histogramme de la première ligne semble correspondre à notre motif,
+mais l’enquêté a eu une activité régulière pendant toute la période étudiée,
+contrairement aux histogrammes en vert où il y a clairement une période
+d’inactivité au début.
+
+Le dernier histogramme de la seconde ligne semble être un faux négatif, mais
+cette impression est dûe à l’échelle linéaire utilisée pour les ordonnées. Le
+graphique est écrasé par les valeurs maximum, cet enquêté ayant ajouté plus de
+$1 200$ publications en un mois peu avant la fin de la période d’observation.
+
+\subsection{Présentation}
+
+Afin d’avoir une présentation claire de ces indicateurs, j’ai, dans le cadre de
+ce travail, réalisé une application Web en Python permettant de consulter les
+indicateurs d’un enquêté (figure~\ref{app:ego}) ainsi que d’avoir une vue
+aggrégée de toutes les valeurs pour chacun des ensembles
+(figure~\ref{app:home}), de façon similaire au tableau de la
+figure~\ref{indicators} mais plus complète.
+
+\setlength{\abovecaptionskip}{0pt}
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{figures/images/app/home.png}
+    \end{center}
+    \caption{\label{app:home}Page d’accueil}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{figures/images/app/ego.png}
+    \end{center}
+    \caption{\label{app:ego}Page d’un enquêté}
+\end{figure}
+\setlength{\abovecaptionskip}{10pt}
+
+Cette application constitue la plateforme centrale pour le traitement des
+données de l’enquête \I{Algopol}, et est donc utilisée par plusieurs membres du
+projet sur plusieurs pistes de recherche différentes.
+
+\setlength{\abovecaptionskip}{0pt}
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{figures/images/app/links.png}
+    \end{center}
+    \caption{\label{app:links}Liens partagés par un enquêté}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{figures/images/app/search.png}
+    \end{center}
+    \caption{\label{app:search}Recherche par identifiant}
+\end{figure}
+\setlength{\abovecaptionskip}{10pt}
+
+L’application permet également de voir les liens partagés par un enquêté
+(figure~\ref{app:links}), de prendre des notes privées sur chacun d’entre eux
+et d’en marquer pour les retrouver plus tard, ainsi que de chercher des
+enquêtés par leur identifiant (figure~\ref{app:search}).
+
+Elle divisée en deux parties similaires, une pour chacun des ensembles qui
+forment le corpus des enquêtés. Chaque partie permet d’exporter tous les
+indicateurs de l’ensemble correspondant au format CSV, exploitable par un
+tableur.
+
+J’ai apporté une attention particulière à de nombreux petits détails permettant
+de faciliter le travail des utilisateurs de l’application. Par exemple, les
+identifiants (\I{hashs}) des enquêtés étant suffisamment aléatoires, il
+n’existe pas deux enquêtés avec un identifiant commençant par un même préfixe
+de 8 caractères. C’est pourquoi l’application raccourcit ceux-ci par défaut
+pour prendre moins d’espace sur la page.
+
+Pour raccourcir le temps d’extraction des indicateurs, les liens partagés par
+les enquêtés ne sont pas extraits en même temps que le reste, mais au moment où
+la page d’un enquêté est visitée : un appel asynchrone au serveur par le
+navigateur avec \I{\sc ajax}\footnote{\q{Asynchronous JavaScript And {\sc
+Xml}}, un moyen en JavaScript de communiquer au serveur sans bloquer les
+interactions sur la page.} est réalisé, et le serveur extrait les liens de
+l’enquêté et les insert dans la base de données s’ils ne sont pas déjà présents
+puis les envoit au navigateur, qui les injecte dynamiquement dans l’onglet
+correspondant. Ce procédé, invisible pour l’utilisateur, permet d’avoir un
+temps de chargement des pages rapide quelque soit le nombre de liens partagés
+par l’enquêté.
+
+Enfin, j’ai défini l’architecture et conçu l’application de façon modulaire
+pour rendre le plus simple possible l’ajout de nouveaux indicateurs. J’ai
+travaillé avec Gérald Foliot, ingénieur responsable d’\humanum{}, pour la mise
+en ligne de l’application sur leurs serveurs.
+
+Développée pour la continuité, l’application sera progressivement reprise par
+un autre étudiant à la fin du {\sc tre}, qui continuera son développement.

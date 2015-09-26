@@ -1,0 +1,97 @@
+%!TEX root = rapport.tex
+
+\section{Signatures sociales}
+
+En plus de l’extraction de ces indicateurs, ce corpus permet l’étude des
+\q{signatures sociales}. Dans un article publié dans \pnas{} en 2014
+\citep{Saramaki2014}, J. Saram\"aki décrit une expérience réalisée avec une
+vingtaine de lycéens en dernière année basée sur des appels téléphoniques.
+L’expérience s’est déroulée sur dix-huit mois, pendant laquelle le réseau
+social proche des étudiants a connu de forts changements puisqu’ils ont quitté
+le lycée pour aller à l’université \citep{Paul2001} ou pour une minorité
+d’entre eux rejoindre le monde professionnel. Les métadonnées des appels des
+lycéens sortants (puis étudiants) vers leurs proches ont été enregistrées
+pendant toute la période, puis utilisées pour construire une \I{signature
+sociale} pour chaque enquêté sur trois périodes de six mois. Une signature est
+une courbe avec en abscisse le rang de chacun des \I{alters} de l’enquêtés
+ordonnés par nombre d’appels, et en ordonnées la fraction de ses appels par
+rapport à tous les appels de l’enquêté sur la période.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{figures/saramaki.pdf}
+    \end{center}
+    \caption{\label{fig:saramaki}Courbes de Sar\"amaki}
+\end{figure}
+
+Un exemple de signatures est donné en figure~\ref{fig:saramaki}, extraite de
+l’article. Sur cette figure, les trois signatures du haut correspondent à un
+enquêté pour trois périodes de six mois, et les trois du bas correspondent à un
+autre enquêté pendant ces mêmes périodes. Les couleurs des points correspondent
+au semestre pendant lequel l’\I{alter} correspondant a été vu pour la première
+fois.
+
+Dans cet article, Saram\"aki souhaite montrer que les signatures sociales
+persistent à travers le temps pour un individu donné, et ce même avec de forts
+changements dans le réseau social.
+
+Afin de mieux comprendre la méthodologie, j’ai reproduit les signatures
+sociales de quelques enquêtés de cette étude, en utilisant les données de
+l’article.
+
+\setlength{\abovecaptionskip}{0pt}
+\begin{figure}[ht]
+    \begin{center}
+    \begin{minipage}[t]{.4\linewidth}
+        \begin{center}
+    \includegraphics[width=1\textwidth]{figures/plots/saramaki/sigs/e14-sig.pdf}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}[t]{.4\linewidth}
+        \begin{center}
+    \includegraphics[width=1\textwidth]{figures/plots/saramaki/sigs/e24-sig.pdf}
+        \end{center}
+    \end{minipage}
+    \end{center}
+    \caption{\label{fig:saramaki-repro}Reproduction de courbes de Saram\"aki}
+\end{figure}
+\setlength{\abovecaptionskip}{10pt}
+
+La figure~\ref{fig:saramaki-repro} montre les courbes pour deux enquêtés sur
+les six premiers mois de l’étude.
+
+Cette étude pourrait être appliquée de façon similaire sur les données du
+corpus dont l’on dispose. Les indicateurs présentés précédemment facilitent la
+sélection d’enquêtés pour ce type d’études, et la principale difficulté réside
+plus dans le choix des métriques à utiliser que dans la quantité des données
+disponibles. Ainsi, Saram\"aki n’a utilisé que le nombre d’appels téléphoniques
+(et non leur durée), tandis que nous disposons de plus d’interactions comme
+les commentaires, \I{likes}, et publications des \I{alters} sur le \I{mur} de
+l’enquêté.
+
+\setlength{\abovecaptionskip}{0pt}
+\begin{figure}[ht]
+    \begin{center}
+    \begin{minipage}[t]{.4\linewidth}
+        \begin{center}
+    \includegraphics[width=1\textwidth]{figures/plots/saramaki/sigs/001b846d588984fe534083587b094f813fc02e76-sig.pdf}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}[t]{.4\linewidth}
+        \begin{center}
+    \includegraphics[width=1\textwidth]{figures/plots/saramaki/sigs/00823e9d866857f6863e600dbe6218232b5f1371-sig.pdf}
+        \end{center}
+    \end{minipage}
+    \end{center}
+    \caption{\label{fig:saramaki-fb}Signatures sociales sur \fb{}}
+\end{figure}
+\setlength{\abovecaptionskip}{10pt}
+
+À titre d’exemple, la figure~\ref{fig:saramaki-fb} montre deux signatures pour
+des enquêtés de l’ensemble \nocsa. La métrique retenue ici est le nombre de
+publications postées par des \I{alters} sur le profil de l’enquêté. C’est donc
+plus une signature passive qu’active qui est présentée ici, puisqu’on compte
+les interactions provenant des \I{alters} uniquement. Nous ne disposons pas des
+données relatives aux publications de chaque enquêté sur les profils d’autres
+utilisateurs de la plateforme. Le script utilisé pour générer ces courbes est
+générique et peut donc s’adapter à tout type de métrique voulue.

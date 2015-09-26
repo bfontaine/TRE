@@ -1,0 +1,19 @@
+
+Dim 22 juin 07:34
+
+Collaboration aussi avec Stéphane pour les données
+
+En fait, perspectives, c'est vraiment tout à la fin pour donner quelques idées très rapides.  Saramaki, c'est plus que ça, tu as passé du temps dessus et tu as des choses à dire assez détaillées (selon le temps, bien sûr).
+Tu peux avoir une partie {Signatures sociales} par exemple.
+
+
+Rappeler dans la présentation de l'appli qu'elle constitue la plateforme centrale du projet pour le traitement des données de l'enquête, et qu'elle
+est donc utilisée par plusieurs membres du projet, sur plusieurs pistes de recherche.
+
+Ajouter un paragraphe pour dire que c'est toi qui as défini l'architecture de l'appli, que tu as interagi avec Huma-Num pour la rendre opérationnelle.
+
+Dire aussi que tu as inclus des dispositifs (y compris changé le SGBD) pour qu'il soit facile d'ajouter de nouveaux indicateurs
+
+
+Macros pour API
+

@@ -1,0 +1,72 @@
+%!TEX root = rapport.tex
+
+\section{Contexte}
+
+Ce travail a été réalisé dans le cadre du projet \emph{Algopol}, auquel
+participent le {\sc cams} (Centre d’Analyse et de Mathématique Sociale),
+laboratoire du {\sc cnrs} et de l'{\sc ehess} (École des Hautes Études en
+Sciences Sociales), le {\sc liafa}, Linkfluence (entreprise spécialisée dans la
+veille sur le Web) et le laboratoire de sociologie et économie d’Orange Labs,
+et qui regroupe des chercheurs de plusieurs disciplines, dont la sociologie,
+l’économie et l’informatique.
+
+Pour collecter des données nécessaires aux recherches, \I{Algopol} a mis en
+place une application Web, qui, une fois connectée au compte \fb{} d’un
+utilisateur qui l’a acceptée, utilise l’\api\footnote{Une \api{}
+(\q{\I{Application Programming Interface}}) est une interface permettant à des
+programmes d’interagir avec une application, ici \fb{}.} du site pour
+récolter toutes les données associées au profil et aux publications de
+l’intéressé. En plus de cette collecte automatisée, l’utilisateur doit répondre
+à un bref questionnaire personnel comportant notamment son âge, sexe et code
+postal, ainsi que la qualification de la relation qu’il entretient avec cinq de
+ses \I{amis} (au sens de \fb{}) sur le réseau social et surtout en dehors.
+Les utilisateurs peuvent également accepter d’être contactés ultérieurement
+pour un entretien avec une sociologue sur leurs usages de la plateforme, ainsi
+que de partager un lien vers l’application sous forme de publication sur leur
+profil, ce qui permet d’encourager leurs \I{amis} à utiliser l’application.
+
+En échange de cette collecte, l’utilisateur a accès à une représentation
+graphique de son réseau d’\I{amis}, avec différents filtres permettants de
+mettre en valeur différents types d’interactions sur le graphe, et permet de
+visualiser l’évolution de la forme du graphe dans le temps.
+
+La diffusion de l’information concernant l’existence de cette application a
+donc suivi un modèle en \q{boule de neige}~: un ensemble relativement restreint
+d’utilisateurs a utilisé l’application, puis a fait suivre l’information à un
+ensemble un peu plus large, et ainsi de suite. Cet ensemble comptait 11~000
+utilisateurs de 18 ans et plus au début du {\sc tre}.
+
+Cette enquête a permis d’obtenir un grand volume de données, mais n’a une
+valeur statistique que limitée, puisque dû à la façon dont s’est diffusée
+l’information sur l’application, l’ensemble des enquêtés est relativement jeune
+(75\% ont 35 ans ou moins) et masculin. Il est courant dans ce type d’enquête
+de disposer de beaucoup d’informations sans avoir de corpus représentatif. Pour
+compenser cela, \I{Algopol} s’est également associé à l’institut \I{\sc CSA}
+pour former un panel d’internautes représentatif de la population française,
+qui a ensuite utilisé l’application. Ce second corpus d’enquêtés contient des
+informations sur environ 900 utilisateurs de \fb{}, avec une valeur statistique
+plus fiable.
+
+Les études de ces deux corpus (les 11~000 enquêtés \q{boule de neige} et les
+900 du panel {\sc csa}) ont été séparées de façon à bien distinguer les
+observations et résultats obtenus sur l’un par rapport à l’autre, car ceux
+obtenus sur le second sont plus généralisables car le corpus est représentatif.
+
+Cette collecte pose des problèmes de protection de la vie privée, ces données
+sont donc à disposition des chercheurs sous forme anonymisée. Les champs de
+texte sont supprimés, et toutes les données permettant d’identifier un
+individu, comme son nom ou sa ville d’origine lorsqu’elle est disponible, sont
+\I{hashées}, et ce de façon consistante dans toutes les données liées à un
+enquêté. Ce processus donne des données où chaque champ auparavant intelligible
+est désormais un \I{hash}, une suite de 40 caractères hexadécimaux. Ces
+\I{hashs} sont utilisés pour identifier les enquêtés, car ils sont uniques sur
+chacun des corpus~: un identifiant correspond à un et un seul enquêté. La
+consistance du \I{hashage} dans les données liées à un enquêté est importante~:
+si deux publications sont \I{commentées} par un individu ayant le même
+identifiant, c’est que c’est le même dans les deux cas. Cela permet de suivre
+l’évolution des interactions entre l’individu étudié (l’\I{ego}) et un autre (un
+de ses \I{alters}). En revanche, la méthode de \I{hashage} est différente pour
+chaque enquêté, de telle sorte qu’il ne soit pas possible de croiser les
+informations d’un enquêté avec un autre. Il n’est par exemple pas possible de
+savoir si l’\I{alter} d’un enquêté est lui-même présent en tant qu’enquêté dans
+le corpus.
